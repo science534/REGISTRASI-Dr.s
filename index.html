@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Community Doctor of Science</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:#050510;
+color:white;
+overflow-x:hidden;
+}
+
+/* background bintang */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(white 1px, transparent 1px);
+background-size:40px 40px;
+opacity:0.25;
+animation:starsMove 120s linear infinite;
+}
+
+@keyframes starsMove{
+from{transform:translateY(0)}
+to{transform:translateY(-2000px)}
+}
+
+/* loading logo */
+
+.loading{
+position:fixed;
+width:100%;
+height:100%;
+background:#050510;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
+}
+
+.loading img{
+width:120px;
+animation:spinLogo 6s linear infinite;
+border-radius:50%;
+}
+
+@keyframes spinLogo{
+from{transform:rotate(0deg)}
+to{transform:rotate(360deg)}
+}
+
+.loading h2{
+margin-top:20px;
+font-weight:500;
+color:#9f7cff;
+}
+
+/* kontainer */
+
+.container{
+max-width:420px;
+margin:auto;
+padding:20px;
+display:none;
+position:relative;
+z-index:2;
+}
+
+.title{
+text-align:center;
+margin-top:20px;
+}
+
+.title h1{
+font-size:26px;
+margin:0;
+background:linear-gradient(90deg,#8b5cf6,#00e5ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.title p{
+color:#aaa;
+font-size:13px;
+}
+
+/* card form */
+
+.card{
+margin-top:25px;
+padding:25px;
+border-radius:18px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 0 30px rgba(120,90,255,0.2);
+}
+
+.card h2{
+margin-top:0;
+color:#9f7cff;
+}
+
+label{
+display:block;
+margin-top:14px;
+font-size:14px;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(0,0,0,0.4);
+color:white;
+}
+
+textarea{
+resize:none;
+height:90px;
+}
+
+/* status */
+
+.radio-group{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.radio{
+border:1px solid rgba(255,255,255,0.15);
+padding:10px;
+border-radius:12px;
+}
+
+/* tombol */
+
+button{
+width:100%;
+padding:14px;
+margin-top:22px;
+border:none;
+border-radius:14px;
+font-size:16px;
+background:linear-gradient(90deg,#7c3aed,#06b6d4);
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px #6c63ff;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+font-size:12px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- loading -->
+
+<div class="loading" id="loading">
+
+<img src="https://image2url.com/r2/default/images/1772693909366-3d832c0e-27f8-4e77-b162-01a2b11b042e.jpg">
+
+<h2>Memuat Sistem...</h2>
+
+</div>
+
+<!-- website -->
+
+<div class="container" id="main">
+
+<div class="title">
+<h1>COMMUNITY DOCTOR OF SCIENCE</h1>
+<p>Komunitas Kreator Astronomi</p>
+</div>
+
+<div class="card">
+
+<h2>Formulir Pendaftaran</h2>
+
+<label>Nama Lengkap</label>
+<input id="nama" type="text" placeholder="Masukkan nama lengkap">
+
+<label>Umur</label>
+<input id="umur" type="number" placeholder="Contoh: 20">
+
+<label>Status</label>
+
+<div class="radio-group">
+
+<div class="radio">
+<input type="radio" name="status" value="Pelajar"> Pelajar
+</div>
+
+<div class="radio">
+<input type="radio" name="status" value="Mahasiswa"> Mahasiswa
+</div>
+
+<div class="radio">
+<input type="radio" name="status" value="Pekerja"> Pekerja
+</div>
+
+<div class="radio">
+<input type="radio" name="status" value="Lainnya"> Lainnya
+</div>
+
+</div>
+
+<label>Alasan Ingin Bergabung</label>
+<textarea id="alasan" placeholder="Jelaskan alasan Anda ingin bergabung"></textarea>
+
+<label>Pengetahuan Astronomi</label>
+<textarea id="astro" placeholder="Jelaskan pengetahuan Anda tentang astronomi"></textarea>
+
+<label>Film Astronomi Favorit</label>
+<input id="film" type="text" placeholder="Contoh: Interstellar">
+
+<label>Username TikTok</label>
+<input id="tiktok" type="text" placeholder="@username">
+
+<button onclick="kirimWA()">Kirim Pendaftaran</button>
+
+</div>
+
+<div class="footer">
+© 2026 Community Doctor of Science
+</div>
+
+</div>
+
+<script>
+
+/* loading */
+
+setTimeout(()=>{
+document.getElementById("loading").style.display="none"
+document.getElementById("main").style.display="block"
+},3000)
+
+/* kirim whatsapp */
+
+function kirimWA(){
+
+let nama = document.getElementById("nama").value
+let umur = document.getElementById("umur").value
+let status = document.querySelector('input[name="status"]:checked')?.value || "-"
+let alasan = document.getElementById("alasan").value
+let astro = document.getElementById("astro").value
+let film = document.getElementById("film").value
+let tiktok = document.getElementById("tiktok").value
+
+let pesan =
+`PENDAFTARAN COMMUNITY DOCTOR OF SCIENCE
+
+Nama : ${nama}
+Umur : ${umur}
+Status : ${status}
+
+Alasan Bergabung :
+${alasan}
+
+Pengetahuan Astronomi :
+${astro}
+
+Film Favorit :
+${film}
+
+TikTok :
+${tiktok}`
+
+let url = "https://wa.me/6289654672195?text=" + encodeURIComponent(pesan)
+
+window.open(url,"_blank")
+
+}
+
+</script>
+
+</body>
+  </html>
